@@ -1,4 +1,7 @@
 import streamlit as st
+from funcs import *
+
+
 
 st.title("Welcome")
 st.write('This is an AI web scraper designed to assist you in extracting valuable information from websites effortlessly.')
@@ -22,10 +25,33 @@ To contribute, report issues, or explore the source code, please visit our proje
 We are continually improving this project and welcome contributions from the community. Happy scraping!
 """)
 
+
 url = st.text_input("URL", placeholder='Enter the URL you want to scrape')
-prompt = st.text_area("Prompt", placeholder="What do you want from this URL?")
 
-def clicked():
-    ...
+if prompt := st.chat_input("What do you want from this URL?"):
 
-st.button("search", on_click=clicked)
+    with st.chat_message("user"):
+        st.markdown(prompt)
+
+    with st.spinner('Generating response...'):
+        
+        status, webpage_data = fetch_webpage(url)
+    
+        if status:
+            
+            user_prompt = f"""
+                    1. Web Page Data:
+                    The webpage data is as follows: {webpage_data}
+                    
+                    2. User Prompt:
+                    The user has specified the following request: {prompt}
+                    
+                    you must looking for user prompt in web page date and return what is he want.
+                """
+            response = ask_ai(user_prompt)
+            st.write(
+                st.write_stream(stream_parser(response))
+            )
+        
+        else:
+            st.error(f'Error: {webpage_data}')
