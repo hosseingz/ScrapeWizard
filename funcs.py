@@ -24,7 +24,6 @@ def ask_ai(user_prompt):
     stream = ollama.chat(
         model='phi3:mini',
         messages=[
-            {'role': 'assistant', 'content': "You are an advanced web scraping AI. Your task is to extract specific information from a given webpage based on user prompt."},
             {'role': 'user', 'content': f"{user_prompt}"}
             ],
         stream=True,

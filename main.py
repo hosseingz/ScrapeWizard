@@ -38,16 +38,23 @@ if prompt := st.chat_input("What do you want from this URL?"):
         status, webpage_data = fetch_webpage(url)
     
         if status:
-            
+
             user_prompt = f"""
-                    1. Web Page Data:
-                    The webpage data is as follows: {webpage_data}
-                    
-                    2. User Prompt:
-                    The user has specified the following request: {prompt}
-                    
-                    you must looking for user prompt in web page date and return what is he want.
-                """
+You are tasked with extracting specific information from the following html content:
+
+```{webpage_data}```
+
+please follow these instructions carefully:
+
+1. **Extract Information:** Only extract the information that directly mathces the provided description:
+
+```{prompt}```
+
+
+2. **No Extra Content:** Do not include any additional text, comments, or explanations in your response.
+3. **Empty Response:** If no information matches the description, return an empty string ('').
+4. **Direct Data Only:** Your output should contain only the data that is explicitly requested, with no other text.
+"""
             response = ask_ai(user_prompt)
             st.write(
                 st.write_stream(stream_parser(response))
