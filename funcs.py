@@ -1,3 +1,4 @@
+from bs4 import BeautifulSoup
 import requests
 import ollama
 
@@ -5,8 +6,8 @@ import ollama
 def fetch_webpage(url):
     try:
         response = requests.get(url)
-        response.raise_for_status()
-        return True, response.text
+        soup = BeautifulSoup(response.text, 'html.parser')
+        return True, soup
 
     except requests.exceptions.HTTPError as http_err:
         return False, f"HTTP error occurred: {http_err}"  # HTTP error

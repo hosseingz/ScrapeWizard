@@ -55,10 +55,9 @@ please follow these instructions carefully:
 3. **Empty Response:** If no information matches the description, return an empty string ('').
 4. **Direct Data Only:** Your output should contain only the data that is explicitly requested, with no other text.
 """
+                      
             response = ask_ai(user_prompt)
-            st.write(
-                st.write_stream(stream_parser(response))
-            )
-        
+            st.write_stream(stream_parser(response))
+
         else:
             st.error(f'Error: {webpage_data}')
