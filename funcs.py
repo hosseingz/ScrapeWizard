@@ -46,18 +46,18 @@ def fetch_webpage(url):
         # Load data into vector store
         vectorstore = DocArrayInMemorySearch.from_documents([data], embedding=embedding)
         
-        return True, vectorstore
+        return True, vectorstore, None
 
     except requests.exceptions.HTTPError as http_err:
-        return False, f"HTTP error occurred: {http_err}"  # HTTP error
+        return False, None, f"HTTP error occurred: {http_err}"  # HTTP error
     except requests.exceptions.ConnectionError as conn_err:
-        return False, f"Connection error occurred: {conn_err}"  # Connection error
+        return False, None, f"Connection error occurred: {conn_err}"  # Connection error
     except requests.exceptions.Timeout as timeout_err:
-        return False, f"Timeout error occurred: {timeout_err}"  # Timeout error
+        return False, None, f"Timeout error occurred: {timeout_err}"  # Timeout error
     except requests.exceptions.RequestException as req_err:
-        return False, f"An error occurred: {req_err}"  # Other errors
+        return False, None, f"An error occurred: {req_err}"  # Other errors
     except Exception as e:
-        return False, f"An unexpected error occurred: {e}"  # Unexpected error
+        return False, None, f"An unexpected error occurred: {e}"  # Unexpected error
 
 
 
