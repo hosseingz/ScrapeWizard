@@ -1,8 +1,8 @@
-# Scrape Wizard 🕸️✨
+# Scrape Wizard ⚡️🧙
 
 **Scrape Wizard** is an AI-powered web scraping tool designed to make it easy to extract specific information from web pages. With a user-friendly interface built on **Streamlit** and backed by an **AI-driven query system**, Scrape Wizard takes your custom prompts and retrieves targeted content directly from any URL.
 
-## Key Features
+## Key Features 🤩
 - **Simple, Intuitive Interface**: Easily navigate and interact with the tool without a steep learning curve.
 - **Customizable Queries**: Enter a URL and a specific prompt, and the AI will extract precisely what you're looking for.
 - **Robust Error Handling**: Handles network issues, timeouts, and general errors to ensure reliable scraping.
@@ -14,13 +14,13 @@
 
 To get started, follow these steps to set up the project and install the necessary dependencies.
 
-### 1. Clone the Repository
+### 1. Clone the Repository 📁
 ```bash
 git clone https://github.com/hosseingz/ScrapeWizard.git
 cd ScrapeWizard
 ```
 
-### 2. Install Python Dependencies
+### 2. Install Python Dependencies 📦
 Make sure you have [Python](https://www.python.org/) installed. Then, install the project dependencies:
 
 ```bash
@@ -55,16 +55,16 @@ pip install -r requirements.txt
    ```
 
 2. **Enter URL and Query Prompt**
-   - **URL**: Paste the URL of the webpage you want to scrape.
-   - **Prompt**: Use the prompt input box to specify exactly what you’re looking to extract from the page.
+   - **URL**: Paste the URL of the webpage you want to scrape 🌐.
+   - **Prompt**: Use the prompt input box to specify exactly what you’re looking to extract from the page 🔍.
 
 3. **View Results**
-   Once you submit, the AI will process the webpage and display relevant content based on your query.
+   Once you submit, the AI will process the webpage and display relevant content based on your query 📊.
 
 ---
 
 ## Example Query 📝
-1. **Input URL**: `https://example.com`
+1. **Input URL**: `https://en.wikipedia.org/wiki/Cyrus_the_Great`
 2. **Prompt**: "Extract the main article title and summary."
 
 The AI will retrieve and display the title and summary as specified in your prompt.
