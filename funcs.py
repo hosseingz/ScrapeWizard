@@ -17,21 +17,20 @@ embedding = OllamaEmbeddings(model=MODEL)
 model = Ollama(model=MODEL)
 
 prompt = PromptTemplate.from_template(TEMPLATE)
+html2text = Html2TextTransformer()
 
 
 
 def fetch_webpage(url: str):
     try:
-        html2text = Html2TextTransformer()
+            
         loader = AsyncHtmlLoader(url)
-        
-        pages = loader.load_and_split()
-        pages = html2text.transform_documents(pages)
-        
-        vectorstore = DocArrayInMemorySearch.from_documents(pages, embedding=embedding)
+        docs = loader.load()
+
+        vectorstore = DocArrayInMemorySearch.from_documents(docs, embedding=embedding)
         
         return True, vectorstore, None
-    
+
     except requests.exceptions.RequestException as e:
         return False, None , f"Error fetching webpage: {e}"
     except Exception as e:
