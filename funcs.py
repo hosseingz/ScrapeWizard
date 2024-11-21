@@ -3,6 +3,8 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_community.embeddings import OllamaEmbeddings
 from langchain_community.document_loaders import PyPDFLoader
 from langchain.prompts import PromptTemplate
+from langchain_community.vectorstores import DocArrayInMemorySearch
+
 
 from bs4 import BeautifulSoup
 import requests
@@ -42,7 +44,10 @@ def fetch_webpage(url):
         # Combine data into a single string
         data = f"Title: {title}\nMeta Description: {meta_description}\nHeadings: {', '.join(headings)}\nParagraphs: {' '.join(paragraphs)}"
         
-        return True, data
+        # Load data into vector store
+        vectorstore = DocArrayInMemorySearch.from_documents([data], embedding=embedding)
+        
+        return True, vectorstore
 
     except requests.exceptions.HTTPError as http_err:
         return False, f"HTTP error occurred: {http_err}"  # HTTP error
