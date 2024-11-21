@@ -1,2 +1,11 @@
 ollama
 streamlit
+
+
+langchain-community
+langchain
+pypdf
+
+
+docarray
+pydantic

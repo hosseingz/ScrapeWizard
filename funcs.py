@@ -1,6 +1,20 @@
+from langchain_community.llms import Ollama
+from langchain_core.output_parsers import StrOutputParser
+from langchain_community.embeddings import OllamaEmbeddings
+from langchain_community.document_loaders import PyPDFLoader
+from langchain.prompts import PromptTemplate
+
 from bs4 import BeautifulSoup
 import requests
 import ollama
+
+from .conf import MODEL, TEMPLATE
+
+parser = StrOutputParser()
+embedding = OllamaEmbeddings(model=MODEL)
+model = Ollama(model=MODEL)
+
+prompt = PromptTemplate.from_template(TEMPLATE)
 
 
 
