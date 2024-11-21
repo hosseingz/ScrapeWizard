@@ -4,7 +4,7 @@ streamlit
 
 langchain-community
 langchain
-pypdf
+html2text
 
 
 docarray

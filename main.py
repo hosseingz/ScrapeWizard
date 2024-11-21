@@ -43,4 +43,4 @@ if prompt := st.chat_input("What do you want from this URL?"):
             st.write_stream(stream_parser(response))
 
         else:
-            st.error(f'Error: {error}')
+            st.error(error)
