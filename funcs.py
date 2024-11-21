@@ -4,11 +4,10 @@ from langchain_community.embeddings import OllamaEmbeddings
 from langchain_community.document_loaders import PyPDFLoader
 from langchain.prompts import PromptTemplate
 from langchain_community.vectorstores import DocArrayInMemorySearch
-
+from operator import itemgetter
 
 from bs4 import BeautifulSoup
 import requests
-import ollama
 
 from .conf import MODEL, TEMPLATE
 
@@ -62,19 +61,24 @@ def fetch_webpage(url):
 
 
 
-def ask_ai(user_prompt):
-    stream = ollama.chat(
-        model='phi3:mini',
-        messages=[
-            {'role': 'user', 'content': f"{user_prompt}"}
-            ],
-        stream=True,
+def ask_ai(question:str, vectorstore:DocArrayInMemorySearch):
+    
+    retriever = vectorstore.as_retriever()
+    
+    chain = (
+    {
+        'context': itemgetter('question') | retriever, # بنا به چیزی که میخوایم توی پی دی اف سرچ میشه و بعنوان کانتکست به پرامپت فرستاده میشه
+        'question': itemgetter('question')
+    }
+        | prompt
+        | model
+        | parser
     )
-
-    return stream
-
+    
+    return chain.stream({'question': question})
+        
 
 
 def stream_parser(stream):
     for chunk in stream:
-        yield chunk['message']['content']
+        yield chunk
